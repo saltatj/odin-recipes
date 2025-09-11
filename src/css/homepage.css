@@ -1,0 +1,364 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Decorative background elements */
+body::before {
+    content: '';
+    position: fixed;
+    top: -100px;
+    left: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -150px;
+    right: -150px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 165, 0, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* Main container */
+body {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    padding: 50px 40px;
+    position: relative;
+}
+
+/* Main heading */
+h1 {
+    color: #2d3436;
+    font-size: 3.5rem;
+    text-align: center;
+    margin-bottom: 50px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    background: linear-gradient(135deg, #fd79a8, #fdcb6e);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+h1::after {
+    content: '👨‍🍳';
+    position: absolute;
+    top: -20px;
+    right: -60px;
+    font-size: 2rem;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+/* Recipe list styling */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+/* Individual recipe items */
+li {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 249, 250, 0.9));
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b6b, #ffa500, #00b894);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+li:hover::before {
+    transform: translateX(0);
+}
+
+li:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 107, 107, 0.3);
+}
+
+/* Recipe links */
+li a {
+    display: block;
+    padding: 30px;
+    text-decoration: none;
+    color: #2d3436;
+    font-size: 1.4rem;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Recipe icons */
+li a::before {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    vertical-align: middle;
+    border-radius: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.3s ease;
+}
+
+/* Specific recipe icons */
+li:nth-child(1) a::before {
+    content: '🍝';
+    font-size: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ff6b6b, #ffa500);
+}
+
+li:nth-child(2) a::before {
+    content: '🍕';
+    font-size: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #fd79a8, #fdcb6e);
+}
+
+li:nth-child(3) a::before {
+    content: '🌮';
+    font-size: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #00b894, #00cec9);
+}
+
+li:hover a::before {
+    transform: rotate(360deg) scale(1.1);
+}
+
+li:hover a {
+    color: #d63031;
+}
+
+/* Arrow indicator */
+li a::after {
+    content: '→';
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%) translateX(-10px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+    color: #00b894;
+}
+
+li:hover a::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+/* Back link styling */
+a.href {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 8px 25px rgba(108, 92, 231, 0.3);
+    position: relative;
+    overflow: hidden;
+    margin: 20px auto 0;
+    min-width: 150px;
+}
+
+a.href::before {
+    content: '← Back to Home';
+    transition: transform 0.3s ease;
+}
+
+a.href::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+a.href:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(108, 92, 231, 0.4);
+}
+
+a.href:hover::after {
+    left: 100%;
+}
+
+a.href:active {
+    transform: translateY(0);
+}
+
+/* Recipe count indicator */
+ul::before {
+    content: attr(data-count) ' Delicious Recipes Available';
+    display: block;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #636e72;
+    margin-bottom: 30px;
+    padding: 15px;
+    background: linear-gradient(135deg, rgba(116, 185, 255, 0.1), rgba(162, 155, 254, 0.1));
+    border-radius: 25px;
+    border: 2px dashed #74b9ff;
+    position: relative;
+}
+
+/* Floating animation for decorative elements */
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-10px) rotate(2deg); }
+    66% { transform: translateY(5px) rotate(-2deg); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 30px 20px;
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h1::after {
+        top: -15px;
+        right: -40px;
+        font-size: 1.5rem;
+    }
+    
+    li a {
+        padding: 25px 20px;
+        font-size: 1.2rem;
+    }
+    
+    li a::before {
+        width: 35px;
+        height: 35px;
+        margin-right: 15px;
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 20px 15px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    
+    li a {
+        padding: 20px 15px;
+        font-size: 1.1rem;
+    }
+    
+    li a::before {
+        width: 30px;
+        height: 30px;
+        margin-right: 12px;
+        font-size: 1.5rem;
+    }
+    
+    a.href {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Loading animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+li {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+li:nth-child(1) { animation-delay: 0.1s; }
+li:nth-child(2) { animation-delay: 0.2s; }
+li:nth-child(3) { animation-delay: 0.3s; }
